@@ -1,0 +1,26 @@
+{
+  "generator-ngx-library": {
+    "authorName": "Jason Watmore",
+    "authorEmail": "webmaster@jasonwatmore.com",
+    "githubUsername": "cornflourblue",
+    "projectName": "ngx-alert-notifications",
+    "projectVersion": "0.0.1",
+    "projectDescription": "Alert notifications module for Angular.",
+    "projectKeywords": [
+      "ng",
+      "angular",
+      "alert",
+      "notifications"
+    ],
+    "ngPrefix": "nga",
+    "ngVersion": "2.0.0",
+    "ngModules": [
+      "core",
+      "common",
+      "router",
+      "platform-browser"
+    ],
+    "useGreenkeeper": false,
+    "useCompodoc": true
+  }
+}
