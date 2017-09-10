@@ -4,11 +4,11 @@
 export class NgaAlert {
     /**
      * the type of the alert
-     */ 
+     */
     type: NgaAlertType;
     /**
      * the message of the alert
-     */ 
+     */
     message: string;
 }
 
