@@ -7,6 +7,7 @@ import { routing }        from './app.routing';
 import { AlertComponent } from './_directives/index';
 import { AlertService } from './_services/index';
 import { HomeComponent } from './home/index';
+import { MultiAlertsComponent, MultiAlertsSectionComponent } from './multi-alerts/index';
 
 @NgModule({
     imports: [
@@ -16,7 +17,9 @@ import { HomeComponent } from './home/index';
     declarations: [
         AppComponent,
         AlertComponent,
-        HomeComponent
+        HomeComponent,
+        MultiAlertsComponent,
+        MultiAlertsSectionComponent
     ],
     providers: [
         AlertService

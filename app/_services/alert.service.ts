@@ -2,6 +2,7 @@
 import { Router, NavigationStart } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/filter';
 
 import { Alert, AlertType } from '../_models/alert';
 
@@ -25,33 +26,36 @@ export class AlertService {
         });
     }
 
-    getAlert(): Observable<any> {
-        return this.subject.asObservable();
+    // subscribe to alerts
+    getAlert(alertId?: string): Observable<any> {
+        return this.subject.asObservable().filter((x: Alert) => x && x.alertId === alertId);
     }
 
-    success(message: string, keepAfterRouteChange = false) {
-        this.alert(AlertType.Success, message, keepAfterRouteChange);
+    // convenience methods
+    success(message: string) {
+        this.alert(new Alert({ message, type: AlertType.Success }));
     }
 
-    error(message: string, keepAfterRouteChange = false) {
-        this.alert(AlertType.Error, message, keepAfterRouteChange);
+    error(message: string) {
+        this.alert(new Alert({ message, type: AlertType.Error }));
     }
 
-    info(message: string, keepAfterRouteChange = false) {
-        this.alert(AlertType.Info, message, keepAfterRouteChange);
+    info(message: string) {
+        this.alert(new Alert({ message, type: AlertType.Info }));
     }
 
-    warn(message: string, keepAfterRouteChange = false) {
-        this.alert(AlertType.Warning, message, keepAfterRouteChange);
+    warn(message: string) {
+        this.alert(new Alert({ message, type: AlertType.Warning }));
     }
 
-    alert(type: AlertType, message: string, keepAfterRouteChange = false) {
-        this.keepAfterRouteChange = keepAfterRouteChange;
-        this.subject.next(<Alert>{ type: type, message: message });
+    // main alert method    
+    alert(alert: Alert) {
+        this.keepAfterRouteChange = alert.keepAfterRouteChange;
+        this.subject.next(alert);
     }
 
-    clear() {
-        // clear alerts
-        this.subject.next();
+    // clear alerts
+    clear(alertId?: string) {
+        this.subject.next(new Alert({ alertId }));
     }
 }

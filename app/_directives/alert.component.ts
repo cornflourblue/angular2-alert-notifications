@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, Input } from '@angular/core';
 
 import { Alert, AlertType } from '../_models/index';
 import { AlertService } from '../_services/index';
@@ -10,13 +10,15 @@ import { AlertService } from '../_services/index';
 })
 
 export class AlertComponent {
+    @Input() id: string;
+
     alerts: Alert[] = [];
 
     constructor(private alertService: AlertService) { }
 
     ngOnInit() {
-        this.alertService.getAlert().subscribe((alert: Alert) => {
-            if (!alert) {
+        this.alertService.getAlert(this.id).subscribe((alert: Alert) => {
+            if (!alert.message) {
                 // clear alerts when an empty alert is received
                 this.alerts = [];
                 return;
